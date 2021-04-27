@@ -1,10 +1,10 @@
 import { useEffect, useState, FunctionComponent } from 'react';
 import axios from 'axios';
-
-import { Push } from '../models/push.model';
+import Push from './Push';
+import { IPush } from '../models/push.model';
 
 const PushList: FunctionComponent = () => {
-  const [pushes, setPushes] = useState<Push[]>([]);
+  const [pushes, setPushes] = useState<IPush[]>([]);
 
   useEffect(() => {
     const getAllPushes = async () => {
@@ -18,17 +18,9 @@ const PushList: FunctionComponent = () => {
   return (
     <div className="container bg-light">
       {pushes.length ? (
-        pushes.map(push => (
-          <div key={push._id}>
-           {push.pushed_at}
-           commits
-           {push.commits.map(commit => (
-             <div key={commit.url}>
-               {commit.message}
-            </div>
-           ))}
-          </div>
-        ))
+        pushes.map(push =>
+          <Push key={push._id} push={push}/>
+        )
       ) : null}
     </div>
   );

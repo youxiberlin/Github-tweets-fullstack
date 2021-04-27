@@ -1,18 +1,20 @@
 import { FunctionComponent } from 'react';
-import { Push } from '../models/push.model';
+import Commit from './Commit';
+import { IPush } from '../models/push.model';
 
-const PushList: FunctionComponent<{ push: Push }> = ({ push }) => {
+const Push: FunctionComponent<{ push: IPush }> = ({ push }) => {
   return (
-    <div key={push._id}>
-      {push.pushed_at}
-      commits
-      {push.commits.map(commit => (
-        <div key={commit.url}>
-          {commit.message}
+    <div>
+      <div>
+        {push.pushed_at}
       </div>
-      ))}
+      <div>
+        <div>commits</div>
+      {push.commits.map(commit =>
+        <Commit key={commit.url} commit={commit} />)}
+      </div>
     </div>
   );
 };
 
-export default PushList;
+export default Push;

@@ -1,7 +1,7 @@
-import { Commit } from './commit.model';
+import { ICommit } from './commit.model';
 
-export interface Push {
-  commits: Commit[],
+export interface IPush {
+  commits: ICommit[],
   pushed_at: string,
   compare: string,
   _id: string,
