@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FunctionComponent } from 'react';
 import axios from 'axios';
 
 import { Push } from '../models/push.model';
 
-const PushList: React.FC = () => {
+const PushList: FunctionComponent = () => {
   const [pushes, setPushes] = useState<Push[]>([]);
+
   useEffect(() => {
     const getAllPushes = async () => {
       const { data: pushes } = await axios.get('http://localhost:8080/api/pushes');
@@ -12,11 +13,10 @@ const PushList: React.FC = () => {
       return pushes;
     }
     getAllPushes();
-  }, [])
-  console.log('pushes', pushes)
+  }, []);
 
   return (
-    <div className="App">
+    <div className="container bg-light">
       {pushes.length ? (
         pushes.map(push => (
           <div key={push._id}>
@@ -32,6 +32,6 @@ const PushList: React.FC = () => {
       ) : null}
     </div>
   );
-}
+};
 
 export default PushList;
