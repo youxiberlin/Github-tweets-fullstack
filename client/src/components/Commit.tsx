@@ -3,10 +3,18 @@ import { ICommit } from '../models/commit.model';
 
 const Commit: FunctionComponent<{ commit: ICommit }> = ({ commit }) => {
   return (
-    <div key={commit.url}>
-      <div>{commit.message}</div>
-      <div>by {commit.committer}</div>
-      <div><a href={commit.url} target="blank">Detail</a></div>
+    <div key={commit.url} className="d-flex flex-row align-items-center">
+      <div className="mx-1">
+      {commit.message}
+      </div>
+      <div className="text-secondary" style={{ fontSize: 14 }}>
+        by {commit.committer}
+      </div>
+      <div className="mx-1" style={{ fontSize: 14 }}>
+        <a href={commit.url} target="blank">
+          Detail
+        </a>
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ const PushList: FunctionComponent = () => {
   }, []);
 
   return (
-    <div className="container bg-light">
+    <div className="container bg-light p-3">
       {pushes.length ? (
         pushes
           .sort((a: any, b: any) => b.pushed_at - a.pushed_at)

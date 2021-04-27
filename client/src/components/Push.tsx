@@ -6,12 +6,12 @@ moment.locale();
 
 const Push: FunctionComponent<{ push: IPush }> = ({ push }) => {
   return (
-    <div>
-      <div>
+    <div className="my-3 border-bottom">
+      <div style={{ fontSize: 14 }}>
         {moment(+push.pushed_at * 1000).format('HH:mm DD-MM-YY')}
       </div>
-      <div>
-        <div>commits</div>
+      <div className="mb-3">
+        <div style={{ fontWeight: 500 }}>commits</div>
         {push.commits.map(commit =>
           <Commit key={commit.url} commit={commit} />)}
       </div>
