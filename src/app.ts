@@ -3,12 +3,12 @@ dotenv.config();
 import express from 'express';
 import { json } from 'body-parser';
 import * as database from './services/database';
-import { postHook } from './controller';
+import routes from './routes';
 
 const app = express();
 app.use(json());
 app.use('/test', (req, res) => res.status(200).send('hello world'));
-app.post('/api/hook', postHook);
+app.use('/api', routes);
 
 app.listen(process.env.PORT, () => {
   console.log(`App listening to port ${process.env.PORT}`);
