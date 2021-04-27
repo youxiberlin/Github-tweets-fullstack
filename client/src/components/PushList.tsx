@@ -18,7 +18,9 @@ const PushList: FunctionComponent = () => {
   return (
     <div className="container bg-light">
       {pushes.length ? (
-        pushes.map(push =>
+        pushes
+          .sort((a: any, b: any) => b.pushed_at - a.pushed_at)
+          .map(push =>
           <Push key={push._id} push={push}/>
         )
       ) : null}

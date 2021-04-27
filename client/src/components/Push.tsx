@@ -12,8 +12,8 @@ const Push: FunctionComponent<{ push: IPush }> = ({ push }) => {
       </div>
       <div>
         <div>commits</div>
-      {push.commits.map(commit =>
-        <Commit key={commit.url} commit={commit} />)}
+        {push.commits.map(commit =>
+          <Commit key={commit.url} commit={commit} />)}
       </div>
     </div>
   );
