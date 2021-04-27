@@ -10,7 +10,9 @@ export const postHook: RequestHandler = async (req, res) => {
     const { commits } = req.body;
     const commitsData: Array<void> = commits.map((commit: any) => {
       return {
-        message: commit.message
+        message: commit.message,
+        url: commit.url,
+        committer: commit.committer.username
       };
     });
 
