@@ -1,9 +1,11 @@
 import React from 'react';
+import PushList from './components/PushList';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       App
+      <PushList />
     </div>
   );
 }
