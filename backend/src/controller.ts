@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
 import Push from './models/push';
+import { ICommit } from './models/commit';
 import twitterClient from './services/twitter';
 
 export const getPushes: RequestHandler = async (req, res) => {
@@ -24,7 +25,7 @@ export const postHook: RequestHandler = async (req, res) => {
       const { pushed_at } = req.body.repository;
       const { compare } = req.body;
       const { commits } = req.body;
-      const commitsData: Array<void> = commits.map((commit: any) => {
+      const commitsData: ICommit[] = commits.map((commit: ICommit) => {
         return {
           message: commit.message,
           url: commit.url,

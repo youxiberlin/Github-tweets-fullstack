@@ -1,9 +1,10 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
+import { ICommit } from './commit';
 
 export interface IPush extends Document {
   pushed_at: number;
   compare: string;
-  commits: Types.Array<Map<string, string>>;
+  commits: Types.Array<ICommit>;
 };
 
 const PushSchema: Schema = new Schema(
