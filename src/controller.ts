@@ -2,6 +2,18 @@ import { RequestHandler } from 'express';
 import Push from './models/push';
 import twitterClient from './services/twitter';
 
+export const getPushes: RequestHandler = async (req, res) => {
+  try {
+    const pushes = await Push.find();
+
+    res.status(200).send({
+      data: pushes
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const postHook: RequestHandler = async (req, res) => {
   try {
     const body = req.body;
