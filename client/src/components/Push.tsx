@@ -11,7 +11,7 @@ const Push: FunctionComponent<{ push: IPush }> = ({ push }) => {
         {moment(+push.pushed_at * 1000).format('HH:mm DD-MM-YY')}
       </div>
       <div className="mb-3">
-        <div style={{ fontWeight: 500 }}>commits</div>
+        <div style={{ fontSize: 14 }}>commits</div>
         {push.commits.map(commit =>
           <Commit key={commit.url} commit={commit} />)}
       </div>
