@@ -35,10 +35,16 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 cd backend
 yarn start || npm start
 ```
-
-You can set the configuration for port and MongoDB's host and port inside `./config.js`.  
 The default port for the server is `8080`.
 
+**Environment variables**  
+To allow the backend server post the new Github push to your Twitter account, please get following keys at [Twitter Developer center](https://developer.twitter.com/en).
+- PORT
+- MONGO_URL (required)
+- TWITTER_CONSUMER_KEY (required)
+- TWITTER_CONSUMER_SECRET (required)
+- TWITTER_ACCESS_TOKEN_KEY (required)
+- TWITTER_ACCESS_TOKEN_SECRET (required)
 
 #### REST API Endpoints
 The posted stories and comments are saved to MongoDB, and you can get the data by accessing following endpoints.
@@ -46,11 +52,14 @@ The posted stories and comments are saved to MongoDB, and you can get the data b
 - GET: `http://localhost:8080/api/pushes` : to get the list of posted pushes
 - POST: `http://localhost:8080/api/hook` : to post the webhook data
 
-** NOTE **  
+**NOTE**  
 As the Github webhook can't post data to a port on localhost, you need to use a public URL to receive the webhook data.  
 With [ngrok](https://ngrok.com/), you can set up a public URL while you are running the backend server at a localhost.  
 After installing ngrok, you can get a public URL with this command.
 ```
 $ ./ngrok http 8080
 ```
-Then, at `Webhooks` setting at `Setting` page of a Github repository, enter `${ngrok_public_url}/api/hook` in the `Payload URL`.
+Then, at `Webhooks` setting at `Setting` page of a Github repository, enter `${ngrok_public_url}/api/hook` in the `Payload URL`.   
+
+When you successfully set the envoironment variables and the payload URL at a Github repository, you get tweets like this when there is a new push made to the repository.  
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">New commits at Github-tweets-fullstack<br><br> 🚀 Add type check for Commit obj by youxiberlin<br><br> See more details at <a href="https://t.co/8kta9D1Tez">https://t.co/8kta9D1Tez</a></p>&mdash; node-ts-test (@node_ts) <a href="https://twitter.com/node_ts/status/1387125233375711241?ref_src=twsrc%5Etfw">April 27, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

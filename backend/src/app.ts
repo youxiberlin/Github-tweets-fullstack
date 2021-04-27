@@ -12,8 +12,8 @@ app.use(cors());
 app.use('/test', (req, res) => res.status(200).send('hello world'));
 app.use('/api', routes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`App listening to port ${process.env.PORT}`);
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`App listening to port ${process.env.PORT || 8080}`);
   database.connect()
     .then(() => console.log('Connected to MongoDB'))
     .catch((e) => console.log(`MongoDB Connection Error: ${e}`))
