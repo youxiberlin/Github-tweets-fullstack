@@ -1,4 +1,3 @@
-import mongoose, { Mongoose } from 'mongoose';
 import Push from '../models/push';
 import { ICommit } from '../models/commit';
 

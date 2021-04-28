@@ -35,7 +35,7 @@ export const postHook: RequestHandler = async (req, res) => {
     await createPush({ pushed_at, compare, commits: commitsData });
 
     res.status(200).send({
-      message: `${req.body.message} stored`,
+      message: 'Success',
     });
   } catch (e) {
     console.log(`Error at getting Github webhook: ${e}`);

@@ -35,8 +35,10 @@ describe('findPushes tests', () => {
         expect(commit).toHaveProperty('message', 'url', 'committer');
       })
     });
-  })
+  });
 });
+
+
 
 describe('Hook functional tests', () => {
   it('should sccessfully create a new push', () => {

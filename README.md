@@ -2,7 +2,7 @@
 
 This application is compose of the frontend and the backend part.  
 
-**Frontend:** it fetches Github pushes from the backend server and lists the pushes. Developed with Typescript and React.  
+**Frontend:** it fetches Github pushes from the backend server and lists them. Developed with Typescript and React.  
 
 **Backend:** it receives data of Github pushes that were posted by Github webhook, and stores the data to MongoDB. Available endpoints of the REST API are listed below.
 
