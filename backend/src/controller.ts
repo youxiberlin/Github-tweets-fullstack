@@ -2,6 +2,7 @@ import { RequestHandler } from 'express';
 import Push from './models/push';
 import { ICommit } from './models/commit';
 import twitterClient from './services/twitter';
+import { createPush } from './services/createPush';
 
 export const getPushes: RequestHandler = async (req, res) => {
   try {
@@ -33,8 +34,8 @@ export const postHook: RequestHandler = async (req, res) => {
         };
       });
 
-      const doc = new Push({ pushed_at, compare, commits: commitsData });
-      await doc.save();
+      await createPush({ pushed_at, compare, commits: commitsData });
+
       res.status(200).send({
         message: `${req.body.message} stored`,
       });

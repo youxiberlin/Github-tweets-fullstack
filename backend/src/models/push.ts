@@ -4,7 +4,7 @@ import { ICommit } from './commit';
 export interface IPush extends Document {
   pushed_at: number;
   compare: string;
-  commits: Types.Array<ICommit>;
+  commits: ICommit[];
 }
 
 const PushSchema: Schema = new Schema({
