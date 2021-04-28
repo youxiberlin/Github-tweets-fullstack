@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import { json } from 'body-parser';
@@ -14,7 +14,8 @@ app.use('/api', routes);
 
 app.listen(process.env.PORT || 8080, () => {
   console.log(`App listening to port ${process.env.PORT || 8080}`);
-  database.connect()
+  database
+    .connect()
     .then(() => console.log('Connected to MongoDB'))
-    .catch((e) => console.log(`MongoDB Connection Error: ${e}`))
+    .catch((e) => console.log(`MongoDB Connection Error: ${e}`));
 });

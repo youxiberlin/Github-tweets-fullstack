@@ -8,13 +8,13 @@ export const getPushes: RequestHandler = async (req, res) => {
     const pushes = await Push.find();
 
     res.status(200).send({
-      data: pushes
+      data: pushes,
     });
   } catch (e) {
     console.log(`Error at getPushes controller: ${e}`);
     res.status(500).send({
-      message: 'Internal server error'
-    })
+      message: 'Internal server error',
+    });
   }
 };
 
@@ -29,19 +29,19 @@ export const postHook: RequestHandler = async (req, res) => {
         return {
           message: commit.message,
           url: commit.url,
-          committer: commit.committer.username
+          committer: commit.committer.username,
         };
       });
-  
+
       const doc = new Push({ pushed_at, compare, commits: commitsData });
       await doc.save();
       res.status(200).send({
-        message: `${req.body.message} stored`
+        message: `${req.body.message} stored`,
       });
-    } catch(e) {
+    } catch (e) {
       console.log(`Error at getting Github webhook: ${e}`);
       res.status(500).send({
-        message: 'Internal server error'
+        message: 'Internal server error',
       });
     }
 
