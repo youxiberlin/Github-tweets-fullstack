@@ -32,7 +32,13 @@ export const postHook: RequestHandler = async (req, res) => {
       };
     });
 
-    await createPush({ pushed_at, compare, commits: commitsData });
+    try {
+      await createPush({ pushed_at, compare, commits: commitsData });
+    } catch (e) {
+      res.status(500).send({
+        message: 'The data could not stored in DB',
+      });
+    }
 
     res.status(200).send({
       message: 'Success',
