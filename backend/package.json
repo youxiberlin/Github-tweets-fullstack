@@ -8,7 +8,8 @@
     "build": "tsc",
     "postinstall": "npm run build",
     "style:check": "prettier --check 'src/**/*.ts'",
-    "style:fix": "prettier --write 'src/**/*.ts'"
+    "style:fix": "prettier --write 'src/**/*.ts'",
+    "test": "npm run style:check"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
