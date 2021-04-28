@@ -1,3 +1,4 @@
+import mongoose, { Mongoose } from 'mongoose';
 import Push from '../models/push';
 import { ICommit } from '../models/commit';
 
@@ -7,9 +8,9 @@ export interface IPush {
   commits: ICommit[];
 }
 
-export const createPush = async (push: IPush) => {
+export const createPush = async (push: IPush): Promise<IPush> => {
   if (!push) throw new Error('Missing push');
   return Push.create(push);
 };
 
-export const findPushes = async () => Push.find();
+export const findPushes = async (): Promise<IPush[]> => Push.find();
