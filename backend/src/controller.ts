@@ -2,11 +2,11 @@ import { RequestHandler } from 'express';
 import Push from './models/push';
 import { ICommit } from './models/commit';
 import twitterClient from './services/twitter';
-import { createPush } from './services/createPush';
+import { createPush, findPushes } from './services/push';
 
 export const getPushes: RequestHandler = async (req, res) => {
   try {
-    const pushes = await Push.find();
+    const pushes = await findPushes();
 
     res.status(200).send({
       data: pushes,

@@ -9,5 +9,7 @@ export interface IPush {
 
 export const createPush = async (push: IPush) => {
   if (!push) throw new Error('Missing push');
-  await Push.create(push);
+  return Push.create(push);
 };
+
+export const findPushes = async () => Push.find();
