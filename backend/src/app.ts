@@ -17,11 +17,21 @@ app.use('/test', (req, res) =>
 );
 app.use('/api', routes);
 
-database
-  .connect()
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((e) => console.log(`MongoDB Connection Error: ${e}`));
+connect();
 
-app.listen(process.env.PORT || 8080, () =>
-  console.log(`App listening to port ${process.env.PORT || 8080}`)
-);
+function connect() {
+  database
+    .connect()
+    .then(() => {
+      listen();
+      console.log('Connected to MongoDB')
+    })
+    .catch((e) => console.log(`MongoDB Connection Error: ${e}`));
+}
+
+function listen() {
+  if (app.get('env') === 'test') return;
+  app.listen(process.env.PORT || 8080, () =>
+    console.log(`App listening to port ${process.env.PORT || 8080}`)
+  );
+}
