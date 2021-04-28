@@ -4,6 +4,7 @@ const request = supertest(app);
 const dbHandler = require('../db-handler');
 const { createPush } = require('../../dist/services/push');
 const testData = require('../fixtures/testData.json');
+const webhookPayload = require('../fixtures/payload.json');
 
 beforeAll(async () => await dbHandler.connect());
 afterEach(async () => await dbHandler.clearDatabase());
@@ -38,8 +39,6 @@ describe('findPushes tests', () => {
   });
 });
 
-
-
 describe('Hook functional tests', () => {
   it('should sccessfully create a new push', () => {
     const newPush = {
@@ -54,5 +53,23 @@ describe('Hook functional tests', () => {
     expect(async () => await createPush(newPush))
       .not
       .toThrow()
+  });
+
+  it('returns 200 when webhook payload is posted', async () => {
+    const res = await request
+      .post('/api/hook')
+      .send(webhookPayload)
+
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe('Success');
+  });
+
+  it('returns 500 when webhook payload couldn not store to DB', async () => {
+    const res = await request
+      .post('/api/hook')
+      .send({})
+
+    expect(res.status).toBe(500);
+    expect(res.body.message).toBe('Internal server error');
   });
 });
