@@ -63,3 +63,11 @@ Then, at `Webhooks` setting at `Setting` page of a Github repository, enter `${n
 
 When you successfully set the envoironment variables and the payload URL at a Github repository, you get tweets like this when there is a new push made to the repository.  
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">New commits at Github-tweets-fullstack<br><br> 🚀 Add type check for Commit obj by youxiberlin<br><br> See more details at <a href="https://t.co/8kta9D1Tez">https://t.co/8kta9D1Tez</a></p>&mdash; node-ts-test (@node_ts) <a href="https://twitter.com/node_ts/status/1387125233375711241?ref_src=twsrc%5Etfw">April 27, 2021</a></blockquote> 
+
+### Test  
+
+Tests for the backend part can be run with this:
+```
+cd ./backend
+npm run test
+```

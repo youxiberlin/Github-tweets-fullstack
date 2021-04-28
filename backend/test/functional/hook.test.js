@@ -2,7 +2,7 @@ const supertest = require('supertest');
 const app = require('../../dist/app');
 const request = supertest(app);
 const dbHandler = require('../db-handler');
-const { createPush } = require('../../dist/services/push');
+const { createPush, findPushes } = require('../../dist/services/push');
 const testData = require('../fixtures/testData.json');
 const webhookPayload = require('../fixtures/payload.json');
 
@@ -10,13 +10,36 @@ beforeAll(async () => await dbHandler.connect());
 afterEach(async () => await dbHandler.clearDatabase());
 afterAll(async () => await dbHandler.closeDatabase());
 
-describe('test', () => {
+describe('Initial check', () => {
   it('returns "Hello World"', async done => {
     const res = await request.get('/test');
     expect(res.status).toBe(200);
     expect(res.body.message).toBe('hello world');
     done()
   })
+});
+
+describe('Database service tests', () => {
+  it('should sccessfully create a new push', () => {
+    const newPush = {
+      pushed_at: 1619551400,
+      compare: "https://github.com/youxiberlin/Github-tweets-fullstack/compare/46c31f1e294c...0d1f024aeded",
+      commits: [{
+        message : "Updated hook controller",
+        url : "https://github.com/youxiberlin/Github-tweets-fullstack/commit/e331c4b2ae78b72fba0bec86f8b727d6bb01c790",
+        committer : "youxiberlin"
+      }]
+    };
+    expect(async () => await createPush(newPush))
+      .not
+      .toThrow()
+  });
+
+  it('should sccessfully find the stored pushes', () => {
+    expect(async () => await findPushes())
+      .not
+      .toThrow()
+  });
 });
 
 describe('findPushes tests', () => {
@@ -40,21 +63,6 @@ describe('findPushes tests', () => {
 });
 
 describe('Hook functional tests', () => {
-  it('should sccessfully create a new push', () => {
-    const newPush = {
-      pushed_at: 1619551400,
-      compare: "https://github.com/youxiberlin/Github-tweets-fullstack/compare/46c31f1e294c...0d1f024aeded",
-      commits: [{
-        message : "Updated hook controller",
-        url : "https://github.com/youxiberlin/Github-tweets-fullstack/commit/e331c4b2ae78b72fba0bec86f8b727d6bb01c790",
-        committer : "youxiberlin"
-      }]
-    };
-    expect(async () => await createPush(newPush))
-      .not
-      .toThrow()
-  });
-
   it('returns 200 when webhook payload is posted', async () => {
     const res = await request
       .post('/api/hook')
