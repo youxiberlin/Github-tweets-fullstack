@@ -20,11 +20,12 @@ app.use('/api', routes);
 connect();
 
 function connect() {
+  if (app.get('env') === 'test') return;
   database
     .connect()
     .then(() => {
       listen();
-      console.log('Connected to MongoDB')
+      console.log('Connected to MongoDB');
     })
     .catch((e) => console.log(`MongoDB Connection Error: ${e}`));
 }
