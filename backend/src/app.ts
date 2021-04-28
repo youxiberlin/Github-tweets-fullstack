@@ -7,15 +7,21 @@ import * as database from './services/database';
 import routes from './routes';
 
 const app = express();
+
+module.exports = app;
+
 app.use(json());
 app.use(cors());
-app.use('/test', (req, res) => res.status(200).send('hello world'));
+app.use('/test', (req, res) =>
+  res.status(200).send({ message: 'hello world' })
+);
 app.use('/api', routes);
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log(`App listening to port ${process.env.PORT || 8080}`);
-  database
-    .connect()
-    .then(() => console.log('Connected to MongoDB'))
-    .catch((e) => console.log(`MongoDB Connection Error: ${e}`));
-});
+database
+  .connect()
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((e) => console.log(`MongoDB Connection Error: ${e}`));
+
+app.listen(process.env.PORT || 8080, () =>
+  console.log(`App listening to port ${process.env.PORT || 8080}`)
+);
