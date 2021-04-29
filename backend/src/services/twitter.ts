@@ -10,3 +10,16 @@ const client = new Twitter({
 export const postTweet = async (message: string): Promise<any> => {
   return client.post('statuses/update', { status: message });
 };
+
+interface INewPushMessage {
+  repo_name: string;
+  commit_msg: string;
+  username: string;
+  url: string;
+}
+
+export const makeNewPushMessage = (push: INewPushMessage) => {
+  return `New commits at ${push.repo_name}\n
+  🚀 ${push.commit_msg} by ${push.username}\n
+  See more details at ${push.url}`;
+};

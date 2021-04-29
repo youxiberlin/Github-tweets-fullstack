@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { ICommit } from './models/commit';
-import { postTweet } from './services/twitter';
+import { postTweet, makeNewPushMessage } from './services/twitter';
 import { createPush, findPushes } from './services/push';
 
 export const getPushes: RequestHandler = async (req, res) => {
@@ -51,9 +51,12 @@ export const postHook: RequestHandler = async (req, res) => {
   }
 
   try {
-    const tweetMessage = `New commits at ${body.repository.name}\n
-      🚀 ${body.head_commit.message} by ${body.head_commit.committer.username}\n
-      See more details at ${body.compare}`;
+    const tweetMessage = makeNewPushMessage({
+      repo_name: body.repository.name,
+      commit_msg: body.head_commit.message,
+      username: body.head_commit.committer.username,
+      url: body.compare,
+    });
     await postTweet(tweetMessage);
   } catch (e) {
     console.log(`Error at sending tweet: ${e}`);
