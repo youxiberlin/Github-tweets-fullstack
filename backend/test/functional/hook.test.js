@@ -3,6 +3,7 @@ const app = require('../../dist/app');
 const request = supertest(app);
 const dbHandler = require('../db-handler');
 const { createPush, findPushes } = require('../../dist/services/push');
+const { makeNewPushMessage, postTweet } = require('../../dist/services/twitter');
 const testData = require('../fixtures/testData.json');
 const webhookPayload = require('../fixtures/payload.json');
 
@@ -37,6 +38,21 @@ describe('Database service tests', () => {
 
   it('should sccessfully find the stored pushes', () => {
     expect(async () => await findPushes())
+      .not
+      .toThrow()
+  });
+});
+
+describe.skip('Twitter service tests', () => {
+  it('should sccessfully create a new push message', () => {
+    const newMessage = makeNewPushMessage({
+      repo_name: 'test_repo',
+      commit_msg: 'commit message',
+      username: 'tester',
+      url: 'https://github.com/youxiberlin/Github-tweets-fullstack'
+    });
+
+    expect(async () => await postTweet(newMessage))
       .not
       .toThrow()
   });
