@@ -7,4 +7,6 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET!,
 });
 
-export default client;
+export const postTweet = async (message: string): Promise<any> => {
+  return client.post('statuses/update', { status: message });
+};

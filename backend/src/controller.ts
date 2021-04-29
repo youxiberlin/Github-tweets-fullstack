@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { ICommit } from './models/commit';
-import twitterClient from './services/twitter';
+import { postTweet } from './services/twitter';
 import { createPush, findPushes } from './services/push';
 
 export const getPushes: RequestHandler = async (req, res) => {
@@ -54,7 +54,7 @@ export const postHook: RequestHandler = async (req, res) => {
     const tweetMessage = `New commits at ${body.repository.name}\n
       🚀 ${body.head_commit.message} by ${body.head_commit.committer.username}\n
       See more details at ${body.compare}`;
-    await twitterClient.post('statuses/update', { status: tweetMessage });
+    await postTweet(tweetMessage);
   } catch (e) {
     console.log(`Error at sending tweet: ${e}`);
   }
