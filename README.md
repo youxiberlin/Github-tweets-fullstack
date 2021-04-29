@@ -48,7 +48,7 @@ To allow the backend server post the new Github push to your Twitter account, pl
 - TWITTER_ACCESS_TOKEN_SECRET (required)
 
 #### REST API Endpoints
-The posted stories and comments are saved to MongoDB, and you can get the data by accessing following endpoints.
+The posted pushes are saved to MongoDB, and you can get the data by accessing following endpoints.
 
 - GET: `http://localhost:8080/api/pushes` : to get the list of posted pushes
 - POST: `http://localhost:8080/api/hook` : to post the webhook data
