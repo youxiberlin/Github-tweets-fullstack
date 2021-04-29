@@ -11,6 +11,10 @@
     "style:fix": "prettier --write 'src/**/*.ts'",
     "test": "cross-env NODE_ENV=test jest"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
